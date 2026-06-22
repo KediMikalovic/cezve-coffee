@@ -16,7 +16,7 @@ Kahve temalı bir marka sitesi + admin panelinden oluşan tek sayfa uygulaması:
 | [framer-motion](https://www.framer.com/motion/) | Scroll reveal, parallax, spring geçişler, count-up |
 | [react-hot-toast](https://react-hot-toast.com) | Başarı/hata bildirimleri |
 | [lucide-react](https://lucide.dev) | İkon seti |
-| Coffee API (coffee.alexflipnote.dev) + Unsplash havuzu | Ürün görselleri |
+| Unsplash havuzu | Ürün görselleri |
 | [Netlify](https://www.netlify.com) | Statik site barındırma ve deploy |
 
 ## Sayfalar
