@@ -1,7 +1,6 @@
-import { useRef, useState } from "react";
+import { useState, type RefObject } from "react";
 
-export function useTilt(max = 10) {
-  const ref = useRef<HTMLDivElement>(null);
+export function useTilt(ref: RefObject<HTMLDivElement | null>, max = 10) {
   const [style, setStyle] = useState<React.CSSProperties>({
     transform: "perspective(900px) rotateX(0deg) rotateY(0deg)",
   });
@@ -22,5 +21,5 @@ export function useTilt(max = 10) {
   const onMouseLeave = () =>
     setStyle({ transform: "perspective(900px) rotateX(0deg) rotateY(0deg)" });
 
-  return { ref, style, onMouseMove, onMouseLeave };
+  return { style, onMouseMove, onMouseLeave };
 }

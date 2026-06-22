@@ -1,10 +1,12 @@
+import { useRef } from "react";
 import { motion } from "framer-motion";
 import type { Product } from "../../interfaces/product";
 import { useTilt } from "../../hooks/useTilt";
 import { formatPrice } from "../../lib/format";
 
 function FeaturedCard({ product, index }: { product: Product; index: number }) {
-  const tilt = useTilt(9);
+  const ref = useRef<HTMLDivElement>(null);
+  const tilt = useTilt(ref, 9);
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -14,7 +16,7 @@ function FeaturedCard({ product, index }: { product: Product; index: number }) {
       className="group"
     >
       <div
-        ref={tilt.ref}
+        ref={ref}
         onMouseMove={tilt.onMouseMove}
         onMouseLeave={tilt.onMouseLeave}
         style={tilt.style}

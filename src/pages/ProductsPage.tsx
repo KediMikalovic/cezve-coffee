@@ -21,19 +21,22 @@ export default function ProductsPage() {
   const [editing, setEditing] = useState<Product | null>(null);
   const [toDelete, setToDelete] = useState<Product | null>(null);
 
-  async function load() {
-    setLoading(true);
-    try {
-      setItems(await svc.getProducts());
-    } catch {
-      toast.error("Veriler yüklenemedi");
-    } finally {
-      setLoading(false);
-    }
-  }
-
   useEffect(() => {
+    let ignore = false;
+    async function load() {
+      try {
+        const data = await svc.getProducts();
+        if (!ignore) setItems(data);
+      } catch {
+        if (!ignore) toast.error("Veriler yüklenemedi");
+      } finally {
+        if (!ignore) setLoading(false);
+      }
+    }
     void load();
+    return () => {
+      ignore = true;
+    };
   }, []);
 
   const filtered = useMemo(() => {

@@ -20,18 +20,24 @@ export default function ProductForm({ open, initial, onClose, onSubmit }: Props)
   const [imgLoading, setImgLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [wasOpen, setWasOpen] = useState(false);
+
+  if (open !== wasOpen) {
+    setWasOpen(open);
+    if (open) {
+      setName(initial?.name ?? "");
+      setCategory((initial?.category as Category) ?? CATEGORIES[0]);
+      setPrice(initial?.price ?? "");
+      setStock(initial?.stock ?? "");
+      setImage(initial?.image_url ?? null);
+      setErrors({});
+    }
+  }
 
   useEffect(() => {
-    if (!open) return;
-    setName(initial?.name ?? "");
-    setCategory((initial?.category as Category) ?? CATEGORIES[0]);
-    setPrice(initial?.price ?? "");
-    setStock(initial?.stock ?? "");
-    setImage(initial?.image_url ?? null);
-    setErrors({});
-    if (!initial?.image_url) void rollImage();
+    if (open && !initial?.image_url) void rollImage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, initial]);
+  }, [open]);
 
   async function rollImage() {
     setImgLoading(true);

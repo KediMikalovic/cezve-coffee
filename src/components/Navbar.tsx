@@ -5,20 +5,15 @@ import Hummingbird from "./Hummingbird";
 export default function Navbar() {
   const { pathname } = useLocation();
   const isHome = pathname === "/";
-  const [scrolled, setScrolled] = useState(!isHome);
+  const [scrollY, setScrollY] = useState(() => window.scrollY);
 
   useEffect(() => {
-    if (!isHome) {
-      setScrolled(true);
-      return;
-    }
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
+    const onScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [isHome]);
+  }, []);
 
-  const transparent = isHome && !scrolled;
+  const transparent = isHome && scrollY <= 40;
 
   return (
     <header

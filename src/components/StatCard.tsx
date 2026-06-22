@@ -1,12 +1,14 @@
+import { useRef } from "react";
 import { useTilt } from "../hooks/useTilt";
 
 interface Props { icon: React.ReactNode; label: string; value: string; }
 
 export default function StatCard({ icon, label, value }: Props) {
-  const tilt = useTilt(8);
+  const ref = useRef<HTMLDivElement>(null);
+  const tilt = useTilt(ref, 8);
   return (
     <div
-      ref={tilt.ref}
+      ref={ref}
       onMouseMove={tilt.onMouseMove}
       onMouseLeave={tilt.onMouseLeave}
       style={tilt.style}

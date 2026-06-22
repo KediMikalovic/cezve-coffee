@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { motion } from "framer-motion";
 import { Pencil, Trash2, AlertTriangle } from "lucide-react";
 import type { Product } from "../interfaces/product";
@@ -11,7 +12,8 @@ interface Props {
 }
 
 export default function ProductCard({ product, onEdit, onDelete }: Props) {
-  const tilt = useTilt(9);
+  const ref = useRef<HTMLDivElement>(null);
+  const tilt = useTilt(ref, 9);
   const low = product.stock < 20;
   return (
     <motion.div
@@ -23,7 +25,7 @@ export default function ProductCard({ product, onEdit, onDelete }: Props) {
       className="group"
     >
       <div
-        ref={tilt.ref}
+        ref={ref}
         onMouseMove={tilt.onMouseMove}
         onMouseLeave={tilt.onMouseLeave}
         style={tilt.style}
